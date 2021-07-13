@@ -19,6 +19,9 @@ p {
 a {
   color: #F27731; }
 
+* html body {
+  font-size: 125%; }
+
 .warning-button {
   background-color: orange;
   color: #fff;
