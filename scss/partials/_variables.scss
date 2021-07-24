@@ -1,10 +1,16 @@
+// === THEME ===
+// Allowed values: Dark, Light, Default
+$theme: Dark;
+
 // === COLORS ===
 $text-color: #222;
+$body-background-color: #fff;
 $theme-color: #170A48;
 $secondary-color: #F27731;
 $ternary-color: #CCF962;
 $link-color: $secondary-color;
 $menu-item-color: white;
+$hover-state: #efefef;
 // === FONTS ===
 $text-font: 'Alegreya Sans', Arial, sans-serif;
 $headline-font: 'Titillium Web', Georgia, serif;
@@ -14,3 +20,23 @@ $header-height: 60px;
 $footer-height: 90px;
 
 $col: col-width($columns: 8);
+
+@if ($theme == Dark) {
+  $text-color: #fff;
+  $body-background-color: #22222a;
+  $theme-color: #42424a;
+  $secondary-color: #c24721;
+  $ternary-color: #698932;
+  $link-color: $secondary-color;
+  $menu-item-color: white;
+  $hover-state: lighten($body-background-color, 15%);
+} @else if ($theme == Light) {
+  $text-color: #000;
+  $body-background-color: #fff;
+  $theme-color: #372a27;
+  $secondary-color: #d26741;
+  $ternary-color: #b9da63;
+  $link-color: $secondary-color;
+  $menu-item-color: white;
+  $hover-state: #efefef;
+}
