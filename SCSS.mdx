@@ -131,3 +131,97 @@ Some things in CSS are a bit tedious to write, especially with CSS3 and the many
 ### Content Directive
 
 Allow us to pass content into our mixins. `@content`
+
+```scss
+@mixin apply-to-ie-6 {
+  * html {
+    @content;
+  }
+}
+```
+This means that is posible to pass any such a rule that we need to use for a specific element.
+
+________________________________________________________
+
+### Import Directive
+
+```scss
+@import url();
+@import 'http://';
+@import 'filename.css';
+@import 'style-screen' screen;
+```
+
+SCSS preprocessor goes ahead and looks at the current directory we're in.
+
+For instance if there is this kind of import in a SCSS file:
+
+```scss
+@import 'filename';
+
+// SCSS styles
+
+```
+What the preprocessor does it's that first it take a look for the filename if it exists in the current directory. Then, it looks if in the current does have a partial or a simple SCSS file.
+
+Also, it is **not** posible to have then:
+
+```
+// filename.scss and _filename.scss
+```
+
+The preprocessor will be confused.
+
+Furthermore, it is posible to make a single line import like this one:
+
+```scss
+@import 'partials/variables', 'partials/mixins';
+```
+
+Notice, that this import is separated with a comma.
+
+________________________________________________________
+
+### Media Queries
+
+We can nest selectors and media queries.
+
+```scss
+// For example this can be used for a single element:
+
+@mixin small-screens() {
+  @media only screen and (max-width: 480px) {
+    @content;
+  }
+}
+
+```
+________________________________________________________
+
+### SASS SHELL & Basic Arithmetic
+
+`sass --interactive`
+
+**It is important to understand that there are incompatibilities between value units**
+
+```scss
+// Sum pixels
+.rule {
+  witdh: 3px + 4px;
+}
+
+```
+
+________________________________________________________
+
+### Functions
+
+```scss
+// Sum pixels
+.rule {
+  color: rgb(10, 15, 50);
+  color: hsl(60, 50%, 100%);
+}
+
+```
+
