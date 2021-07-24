@@ -216,6 +216,8 @@ ________________________________________________________
 
 ### Functions
 
+Allow us to create reusable logic in our SCSS.
+
 ```scss
 // Sum pixels
 .rule {
@@ -224,4 +226,84 @@ ________________________________________________________
 }
 
 ```
+
+#### Built-in
+
+```scss
+// Functions with SASS
+.rule {
+  color: darken($link-color, 15%);
+  background-color: transparentize(#fefefe, 1);
+  &:hover {
+    color: lighten(orange, 10%);
+    background-color: opacify(#fefefe, .5);
+  }
+}
+```
+
+#### Custom Functions
+
+```scss
+// Functions with SASS
+.rule {
+  color: darken($link-color, 15%);
+  background-color: transparentize(#fefefe, 1);
+  &:hover {
+    color: lighten(orange, 10%);
+    background-color: opacify(#fefefe, .5);
+  }
+}
+
+@function sum($left, $right) { // <-- Declaration
+  @return $left + $right; // <-- Return
+
+@function em($pixels, $context: 16px) {
+  @return ($pixels / $context) * 1em;
+}
+
+@function col-width($columns: 12, $page-width: 100%, $gap: 1%) {
+  @return ($page-width - $gap * ($columns - 1)) / $columns;
+}
+
+@function strip-unit($value) {
+  @return $value / ($value*0 + 1);
+}
+```
+
+### Inheritance
+
+Allow us to extend or apply an existing class or style to a specific element.
+
+```scss
+
+.cta-button {
+  @extend .warning-button;
+  @extend .error;
+  @include rounded;
+  font-weight: bold;
+}
+
+.super-cta-button {
+  @extend .cta-button;
+  font-size: em(20px);
+}
+
+```
+
+Another way to create inheritance is by creating an **extension** that will not create any kind of class. Nevertheless, it will help creating reusable styles in terms of extending rules. For instance:
+
+```scss
+
+%highlight { // Declaration syntax with '%'
+  font-style: italic;
+}
+
+.sub-title {
+  @extend %highlight; // Usage
+  @extend .foo !optional; // Optional extend
+  font-size: em(20px);
+}
+```
+
+**IMPORTANT:** The `@extend` statement will create a lot of selectors, but it won't duplicate styles. In the other hand, having `@mixin` statement will not generate a lot of selectors but it will duplicate the styles.
 
