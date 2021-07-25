@@ -307,7 +307,81 @@ Another way to create inheritance is by creating an **extension** that will not 
 
 **IMPORTANT:** The `@extend` statement will create a lot of selectors, but it won't duplicate styles. In the other hand, having `@mixin` statement will not generate a lot of selectors but it will duplicate the styles.
 
-### If-Else Statements
+### Conditions: If-Else Statements
 
 As many of programming languages, SASS can compare values and depending on its value will allow or not a piece of code. This mostly a `boolean` box.
 
+```scss
+.rule {
+  @if $value == red {
+    $value: blue;
+  } @else {
+    $value: red;
+  }
+}
+```
+
+### Loops
+
+As many of programming languages, SASS can iterate values. This help to repeat certain part of the code.
+
+#### For Loop
+
+Allow us to iterate only by numbers.
+
+```scss
+// From 1 to 6 - Does include the 6th one
+@for $i from 1 through 6 {
+  .col-#{$i} {
+    width: $i * 2em;
+  }
+}
+// From 1 to 5 - Does not include the 6th one
+@for $i from 1 to 6 {
+  .col-#{$i} {
+    width: $i * 2em;
+  }
+}
+```
+
+#### Each Loop - Important.
+
+Allow us to iterate through any list or map we have defined.
+
+```scss
+// List
+$speakers: bob-banker, patty-plume, sandra-smith;
+
+@each $speaker in $speakers {
+  .#{$speaker}-profile {
+    background-image: url('/img/#{$speaker}.png');
+  }
+}
+// Maps
+$font-sizes: (
+  tiny: 8px,
+  small: 11px,
+  medium: 13px,
+  large: 18px
+);
+
+@each $name, $size in $font-sizes {
+  .#{$name} {
+    font-size: $size;
+  }
+}
+```
+
+#### While Loop
+
+```scss
+// While
+
+$j: 2;
+@while $j <= 8 {
+  .picture-#{$j} {
+    width: $j * 10%;
+  }
+  $j: $j + 2;
+}
+```
